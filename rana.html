@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Una rana dibujada con elipses, variables y colores RGB.">
+  <title>Rana loca · p5.js Lab</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">p5<span>.js</span> Lab</a>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html" aria-current="page">Rana</a></li>
+        <li><a href="conejo.html">Conejo</a></li>
+        <li><a href="cena.html">Cena</a></li>
+        <li><a href="dia-nevado.html">Día nevado</a></li>
+        <li><a href="muneco.html">Muñeco</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="proyecto-rana">
+    <section id="presentacion">
+      <h1>Rana loca</h1>
+      <p class="lead">Una cara de rana construida solo con elipses y rectángulos. Las posiciones de los ojos se calculan a partir de las variables <code>x</code> e <code>y</code>, así que mover la rana completa es cambiar solo dos números.</p>
+      <p><a class="boton" href="https://es.khanacademy.org/computer-programming/derivado-de-desafo-rana-loca/6140049511792640" target="_blank" rel="noopener">Ver el proyecto original en Khan Academy ↗</a></p>
+    </section>
+
+    <section id="resultado">
+      <h2>Resultado</h2>
+      <div class="canvas-wrap" id="lienzo" aria-label="Dibujo: Rana loca" role="img"></div>
+    </section>
+
+    <section id="codigo">
+      <h2>Código</h2>
+      <p>Código del proyecto de Khan Academy. En <code>js/rana.js</code> está envuelto en <code>setup()</code> para funcionar con p5.js en una página web.</p>
+<pre><code>var x = 200;
+var y = 250;
+
+noStroke();
+fill(30, 204, 91); // a nice froggy green!
+
+ellipse(x, y, 200, 100); // face
+ellipse(x - 50, y - 50, 40, 40); // left eye socket
+ellipse(x + 50, y - 50, 40, 40); // right eye socket
+
+fill(255, 255, 255); // for the whites of the eyes!
+ellipse(x - 50, y - 50, 30, 30); // left eyeball
+ellipse(x + 50, y - 50, 30, 30); // right eyeball
+
+fill(0, 0, 0);
+ellipse(x , y, 100, 50);
+
+rect(x - 55, y - 55, 10, 10);
+rect(x + 45, y -55, 10, 10);</code></pre>
+    </section>
+
+    <section id="conceptos">
+      <h2>Conceptos que se practican</h2>
+      <div class="tabla-scroll">
+      <table>
+        <thead><tr><th scope="col">Elemento</th><th scope="col">Qué hace</th></tr></thead>
+        <tbody>
+        <tr><th scope="row"><code>var x, var y</code></th><td>Variables que guardan la posición central de la rana.</td></tr>
+        <tr><th scope="row"><code>noStroke()</code></th><td>Quita el borde de las figuras que se dibujan a continuación.</td></tr>
+        <tr><th scope="row"><code>fill(r, g, b)</code></th><td>Define el color de relleno con valores de 0 a 255.</td></tr>
+        <tr><th scope="row"><code>ellipse(x, y, ancho, alto)</code></th><td>Dibuja una elipse centrada en (x, y).</td></tr>
+        <tr><th scope="row"><code>rect(x, y, ancho, alto)</code></th><td>Dibuja un rectángulo con su esquina superior izquierda en (x, y).</td></tr>
+        <tr><th scope="row"><code>Orden de dibujo</code></th><td>Lo último que se dibuja queda encima: cuencas verdes, después ojos blancos, después pupilas.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section id="captura">
+      <h2>Captura del editor original</h2>
+      <figure>
+        <img src="img/captura-rana.png" alt="Captura del código y del resultado de Rana loca en Khan Academy">
+        <figcaption>Editor de Khan Academy: código a la izquierda, resultado a la derecha.</figcaption>
+      </figure>
+    </section>
+
+    <nav class="pager" aria-label="Proyectos">
+      <a class="boton" href="index.html">← Inicio</a>
+      <a class="boton" href="conejo.html">Dientes de conejo →</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sitio hecho con HTML, CSS y JavaScript · Dibujos con p5.js · Proyectos originales de Khan Academy</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="js/rana.js"></script>
+</body>
+</html>

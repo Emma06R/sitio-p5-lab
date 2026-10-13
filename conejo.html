@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Un conejo con orejas, ojos, boca y dientes parametrizados.">
+  <title>Dientes de conejo · p5.js Lab</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">p5<span>.js</span> Lab</a>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="conejo.html" aria-current="page">Conejo</a></li>
+        <li><a href="cena.html">Cena</a></li>
+        <li><a href="dia-nevado.html">Día nevado</a></li>
+        <li><a href="muneco.html">Muñeco</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="proyecto-conejo">
+    <section id="presentacion">
+      <h1>Dientes de conejo</h1>
+      <p class="lead">Un conejo dibujado con figuras básicas. El tamaño de los ojos y el largo de los dientes están guardados en variables, de modo que se pueden modificar sin tocar el resto del código.</p>
+      <p><a class="boton" href="https://es.khanacademy.org/computer-programming/derivado-de-desafo-dientes-de-conejo/4845496641110016" target="_blank" rel="noopener">Ver el proyecto original en Khan Academy ↗</a></p>
+    </section>
+
+    <section id="resultado">
+      <h2>Resultado</h2>
+      <div class="canvas-wrap" id="lienzo" aria-label="Dibujo: Dientes de conejo" role="img"></div>
+    </section>
+
+    <section id="codigo">
+      <h2>Código</h2>
+      <p>Código del proyecto de Khan Academy. En <code>js/conejo.js</code> está envuelto en <code>setup()</code> para funcionar con p5.js en una página web.</p>
+<pre><code>var eyeSize = 20;
+var toothLenght = 30;
+ellipse(150, 70, 60, 120);  // left ear
+ellipse(240, 70, 60, 120);  // right ear
+
+ellipse(200, 170, 150, 150);    // face
+
+fill(0, 0, 0);
+ellipse(170, 150, eyeSize, eyeSize);  // left eye
+ellipse(230, 150, eyeSize, eyeSize);  // right eye
+
+line(150, 200, 250, 200);   // mouth
+
+noFill();
+rect(185, 200, 15, toothLenght); // left tooth
+rect(200, 200, 15, toothLenght); // right tooth</code></pre>
+    </section>
+
+    <section id="conceptos">
+      <h2>Conceptos que se practican</h2>
+      <div class="tabla-scroll">
+      <table>
+        <thead><tr><th scope="col">Elemento</th><th scope="col">Qué hace</th></tr></thead>
+        <tbody>
+        <tr><th scope="row"><code>Variables como parámetros</code></th><td><code>eyeSize</code> y <code>toothLenght</code> permiten ajustar el dibujo cambiando un solo valor.</td></tr>
+        <tr><th scope="row"><code>line(x1, y1, x2, y2)</code></th><td>Dibuja la boca como una línea recta entre dos puntos.</td></tr>
+        <tr><th scope="row"><code>noFill()</code></th><td>Hace que las figuras siguientes solo tengan contorno (los dientes quedan huecos).</td></tr>
+        <tr><th scope="row"><code>Orden de dibujo</code></th><td>Las orejas se dibujan antes que la cara para que la cara las tape parcialmente.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section id="captura">
+      <h2>Captura del editor original</h2>
+      <figure>
+        <img src="img/captura-conejo.png" alt="Captura del código y del resultado de Dientes de conejo en Khan Academy">
+        <figcaption>Editor de Khan Academy: código a la izquierda, resultado a la derecha.</figcaption>
+      </figure>
+    </section>
+
+    <nav class="pager" aria-label="Proyectos">
+      <a class="boton" href="rana.html">← Rana loca</a>
+      <a class="boton" href="cena.html">¿Qué hay de cena? →</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sitio hecho con HTML, CSS y JavaScript · Dibujos con p5.js · Proyectos originales de Khan Academy</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="js/conejo.js"></script>
+</body>
+</html>

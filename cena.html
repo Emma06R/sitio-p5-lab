@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Un plato con comida sobre un fondo gris.">
+  <title>¿Qué hay de cena? · p5.js Lab</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">p5<span>.js</span> Lab</a>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="conejo.html">Conejo</a></li>
+        <li><a href="cena.html" aria-current="page">Cena</a></li>
+        <li><a href="dia-nevado.html">Día nevado</a></li>
+        <li><a href="muneco.html">Muñeco</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="proyecto-cena">
+    <section id="presentacion">
+      <h1>¿Qué hay de cena?</h1>
+      <p class="lead">Un plato circular con un trozo de comida. Es el punto de partida del proyecto: a partir de aquí se pueden agregar más alimentos, cubiertos o una mesa.</p>
+      <p><a class="boton" href="https://es.khanacademy.org/computer-programming/derivado-de-proyecto-qu-hay-de-cena/5857955858464768" target="_blank" rel="noopener">Ver el proyecto original en Khan Academy ↗</a></p>
+    </section>
+
+    <section id="resultado">
+      <h2>Resultado</h2>
+      <div class="canvas-wrap" id="lienzo" aria-label="Dibujo: ¿Qué hay de cena?" role="img"></div>
+    </section>
+
+    <section id="codigo">
+      <h2>Código</h2>
+      <p>Código del proyecto de Khan Academy. En <code>js/cena.js</code> está envuelto en <code>setup()</code> para funcionar con p5.js en una página web.</p>
+<pre><code>noStroke();
+background(200, 200, 200);
+
+//Plato
+fill(255, 225, 255);
+ellipse(200, 200, 300, 300);
+
+//Comida
+fill(139, 69, 19);
+rect(130, 180, 80, 40);</code></pre>
+    </section>
+
+    <section id="conceptos">
+      <h2>Conceptos que se practican</h2>
+      <div class="tabla-scroll">
+      <table>
+        <thead><tr><th scope="col">Elemento</th><th scope="col">Qué hace</th></tr></thead>
+        <tbody>
+        <tr><th scope="row"><code>background(r, g, b)</code></th><td>Pinta todo el lienzo con un color (aquí un gris).</td></tr>
+        <tr><th scope="row"><code>noStroke()</code></th><td>Dibuja el plato y la comida sin borde.</td></tr>
+        <tr><th scope="row"><code>ellipse con ancho = alto</code></th><td>Una elipse con los dos diámetros iguales es un círculo.</td></tr>
+        <tr><th scope="row"><code>Colores RGB</code></th><td>El café (139, 69, 19) representa la comida; el rosa claro (255, 225, 255), el plato.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section id="captura">
+      <h2>Captura del editor original</h2>
+      <figure>
+        <img src="img/captura-cena.png" alt="Captura del código y del resultado de ¿Qué hay de cena? en Khan Academy">
+        <figcaption>Editor de Khan Academy: código a la izquierda, resultado a la derecha.</figcaption>
+      </figure>
+    </section>
+
+    <nav class="pager" aria-label="Proyectos">
+      <a class="boton" href="conejo.html">← Dientes de conejo</a>
+      <a class="boton" href="dia-nevado.html">Día nevado soleado →</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sitio hecho con HTML, CSS y JavaScript · Dibujos con p5.js · Proyectos originales de Khan Academy</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="js/cena.js"></script>
+</body>
+</html>

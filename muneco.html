@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="El muñeco con los brazos levantados, ahora con botón para saludar.">
+  <title>Muñeco de nieve que saluda · p5.js Lab</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">p5<span>.js</span> Lab</a>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="conejo.html">Conejo</a></li>
+        <li><a href="cena.html">Cena</a></li>
+        <li><a href="dia-nevado.html">Día nevado</a></li>
+        <li><a href="muneco.html" aria-current="page">Muñeco</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="proyecto-muneco">
+    <section id="presentacion">
+      <h1>Muñeco de nieve que saluda</h1>
+      <p class="lead">El muñeco de nieve levanta los brazos con dos líneas. Además del dibujo original, esta versión web incluye un botón que activa una animación de saludo usando <code>draw()</code>.</p>
+      <p><a class="boton" href="https://es.khanacademy.org/computer-programming/derivado-de-desafo-mueco-de-nieve-que-saluda/6410851293446144" target="_blank" rel="noopener">Ver el proyecto original en Khan Academy ↗</a></p>
+    </section>
+
+    <section id="resultado">
+      <h2>Resultado</h2>
+      <div class="canvas-wrap" id="lienzo" aria-label="Dibujo: Muñeco de nieve que saluda" role="img"></div>
+      <div class="controles"><button type="button" id="btn-saludar">Saludar</button></div>
+    </section>
+
+    <section id="codigo">
+      <h2>Código</h2>
+      <p>Código del proyecto de Khan Academy. En <code>js/muneco.js</code> está envuelto en <code>setup()</code> para funcionar con p5.js en una página web.</p>
+<pre><code>rect(0, 330, 400, 100);
+ellipse(200, 300, 150, 150);
+ellipse(200, 200, 100, 100);
+ellipse(200, 120, 75, 75);
+line(160, 200, 50, 50);
+line(240, 200, 50, 50);</code></pre>
+      <p class="nota">El bloque de arriba es el dibujo original. Para la animación, el mismo código se encapsula en una función <code>escena(manoX, manoY)</code> que <code>draw()</code> llama en cada fotograma moviendo el punto de la mano con <code>sin()</code> y <code>cos()</code>. Puedes ver el archivo completo en <code>js/muneco.js</code>.</p>
+    </section>
+
+    <section id="conceptos">
+      <h2>Conceptos que se practican</h2>
+      <div class="tabla-scroll">
+      <table>
+        <thead><tr><th scope="col">Elemento</th><th scope="col">Qué hace</th></tr></thead>
+        <tbody>
+        <tr><th scope="row"><code>line()</code></th><td>Los brazos son líneas que van del torso (160, 200) y (240, 200) hacia la mano en (50, 50).</td></tr>
+        <tr><th scope="row"><code>draw()</code></th><td>Función de p5.js que se repite constantemente; es la base de toda animación.</td></tr>
+        <tr><th scope="row"><code>sin() y frameCount</code></th><td>Una función seno que depende del número de fotograma produce un movimiento oscilante suave.</td></tr>
+        <tr><th scope="row"><code>loop() y noLoop()</code></th><td>Inician o detienen el ciclo de <code>draw()</code>; el botón los alterna.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section id="captura">
+      <h2>Captura del editor original</h2>
+      <figure>
+        <img src="img/captura-muneco.png" alt="Captura del código y del resultado de Muñeco de nieve que saluda en Khan Academy">
+        <figcaption>Editor de Khan Academy: código a la izquierda, resultado a la derecha.</figcaption>
+      </figure>
+    </section>
+
+    <nav class="pager" aria-label="Proyectos">
+      <a class="boton" href="dia-nevado.html">← Día nevado soleado</a>
+      <a class="boton" href="teoria-canvas.html">Teoría: canvas →</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sitio hecho con HTML, CSS y JavaScript · Dibujos con p5.js · Proyectos originales de Khan Academy</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="js/muneco.js"></script>
+</body>
+</html>

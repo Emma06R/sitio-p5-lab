@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Visualización gráfica del árbol del DOM de cada página del sitio.">
+  <title>DOM Inspector · p5.js Lab</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">p5<span>.js</span> Lab</a>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="conejo.html">Conejo</a></li>
+        <li><a href="cena.html">Cena</a></li>
+        <li><a href="dia-nevado.html">Día nevado</a></li>
+        <li><a href="muneco.html">Muñeco</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html" aria-current="page">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="inspector" class="ancho">
+    <section id="intro-dom">
+      <h1>Inspector del DOM</h1>
+      <p class="lead">El <strong>DOM</strong> (Document Object Model) es el árbol de objetos con el que el navegador representa una página: la raíz es <code>&lt;html&gt;</code>, de la que cuelgan <code>&lt;head&gt;</code> y <code>&lt;body&gt;</code>, y de estos los contenedores semánticos y sus hijos. Elige una página para ver su jerarquía; haz clic en un nodo para plegar o desplegar sus hijos.</p>
+    </section>
+
+    <section id="visor">
+      <h2>Árbol del DOM por página</h2>
+      <div id="selector-paginas" class="insp-barra" role="group" aria-label="Elegir página"></div>
+      <div id="insp-info" class="insp-info"></div>
+      <div class="insp-barra">
+        <button type="button" id="btn-expandir">Expandir todo</button>
+        <button type="button" id="btn-colapsar">Colapsar a nivel 3</button>
+      </div>
+      <p class="leyenda" aria-label="Leyenda de colores">
+        <span><i style="border-color:#38bdf8"></i>Raíz / body</span>
+        <span><i style="border-color:#a78bfa"></i>Cabecera (head)</span>
+        <span><i style="border-color:#34d399"></i>Contenedor semántico</span>
+        <span><i style="border-color:#fbbf24"></i>Contenido</span>
+        <span><i style="border-color:#5b7089"></i>Otros</span>
+        <span>Burbuja ámbar = hijos ocultos</span>
+      </p>
+      <div class="arbol-scroll"><div id="arbol" aria-live="polite">Cargando…</div></div>
+    </section>
+
+    <section id="como-funciona">
+      <h2>¿Cómo funciona?</h2>
+      <p>El script <code>js/dom-inspector.js</code> descarga cada página con <code>fetch()</code>, la convierte en un documento con <code>DOMParser</code> y recorre recursivamente los nodos de tipo elemento para dibujar una caja por etiqueta. Si el sitio se abre sin servidor (con doble clic), usa una copia del HTML guardada en <code>js/dom-snapshot.js</code>.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sitio hecho con HTML, CSS y JavaScript · Dibujos con p5.js · Proyectos originales de Khan Academy</p>
+  </footer>
+
+  <script src="js/dom-snapshot.js"></script>
+  <script src="js/dom-inspector.js"></script>
+</body>
+</html>

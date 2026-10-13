@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Proyectos de dibujo y animación con p5.js y canvas, adaptados de Khan Academy.">
+  <title>Inicio · p5.js Lab</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">p5<span>.js</span> Lab</a>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html" aria-current="page">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="conejo.html">Conejo</a></li>
+        <li><a href="cena.html">Cena</a></li>
+        <li><a href="dia-nevado.html">Día nevado</a></li>
+        <li><a href="muneco.html">Muñeco</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="inicio">
+    <section id="bienvenida">
+      <h1>Dibujos y animaciones con p5.js</h1>
+      <p class="lead">Colección de proyectos creados originalmente en Khan Academy y adaptados a un sitio web con HTML, CSS y JavaScript estándar. Cada dibujo se renderiza en un elemento <code>&lt;canvas&gt;</code> mediante la librería p5.js.</p>
+    </section>
+
+    <section id="proyectos">
+      <h2>Proyectos</h2>
+      <ul class="rejilla">
+        <li class="tarjeta">
+          <a href="rana.html">
+            <img src="img/miniatura-rana.png" alt="Vista previa de Rana loca" loading="lazy">
+            <div class="cuerpo"><h3>Rana loca</h3><p>Una rana dibujada con elipses, variables y colores RGB.</p></div>
+          </a>
+        </li>
+        <li class="tarjeta">
+          <a href="conejo.html">
+            <img src="img/miniatura-conejo.png" alt="Vista previa de Dientes de conejo" loading="lazy">
+            <div class="cuerpo"><h3>Dientes de conejo</h3><p>Un conejo con orejas, ojos, boca y dientes parametrizados.</p></div>
+          </a>
+        </li>
+        <li class="tarjeta">
+          <a href="cena.html">
+            <img src="img/miniatura-cena.png" alt="Vista previa de ¿Qué hay de cena?" loading="lazy">
+            <div class="cuerpo"><h3>¿Qué hay de cena?</h3><p>Un plato con comida sobre un fondo gris.</p></div>
+          </a>
+        </li>
+        <li class="tarjeta">
+          <a href="dia-nevado.html">
+            <img src="img/miniatura-dia-nevado.png" alt="Vista previa de Día nevado soleado" loading="lazy">
+            <div class="cuerpo"><h3>Día nevado soleado</h3><p>Un muñeco de nieve bajo el sol, sobre un suelo helado.</p></div>
+          </a>
+        </li>
+        <li class="tarjeta">
+          <a href="muneco.html">
+            <img src="img/miniatura-muneco.png" alt="Vista previa de Muñeco de nieve que saluda" loading="lazy">
+            <div class="cuerpo"><h3>Muñeco de nieve que saluda</h3><p>El muñeco con los brazos levantados, ahora con botón para saludar.</p></div>
+          </a>
+        </li>
+        <li class="tarjeta teoria">
+          <a href="teoria-canvas.html">
+            <div class="icono" aria-hidden="true">&lt;/&gt;</div>
+            <div class="cuerpo"><h3>Teoría: la etiqueta canvas</h3><p>Qué es, cómo se obtiene el contexto 2D y cómo se dibuja con él.</p></div>
+          </a>
+        </li>
+        <li class="tarjeta teoria">
+          <a href="teoria-p5.html">
+            <div class="icono" aria-hidden="true">p5</div>
+            <div class="cuerpo"><h3>Teoría: fundamentos de p5.js</h3><p>setup, draw, formas, color, eventos y diferencias con Khan Academy.</p></div>
+          </a>
+        </li>
+        <li class="tarjeta teoria">
+          <a href="dom-inspector.html">
+            <div class="icono" aria-hidden="true">DOM</div>
+            <div class="cuerpo"><h3>Inspector del DOM</h3><p>Árbol gráfico de etiquetas de cada página de este sitio.</p></div>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section id="acerca">
+      <h2>Sobre este sitio</h2>
+      <ul>
+        <li><strong>HTML</strong> estructura cada página con etiquetas semánticas (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;footer&gt;</code>).</li>
+        <li><strong>CSS</strong> define el diseño, la rejilla de tarjetas y el árbol del inspector (<code>css/styles.css</code>).</li>
+        <li><strong>JavaScript</strong> contiene un archivo por dibujo y el script del inspector del DOM (carpeta <code>js/</code>).</li>
+        <li>Las secciones teóricas explican el uso de <code>&lt;canvas&gt;</code> con su contexto 2D y los fundamentos de p5.js.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sitio hecho con HTML, CSS y JavaScript · Dibujos con p5.js · Proyectos originales de Khan Academy</p>
+  </footer>
+
+
+</body>
+</html>

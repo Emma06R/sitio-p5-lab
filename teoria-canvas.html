@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explicación de la etiqueta HTML canvas y su contexto de renderizado 2D.">
+  <title>Teoría: la etiqueta canvas · p5.js Lab</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">p5<span>.js</span> Lab</a>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="conejo.html">Conejo</a></li>
+        <li><a href="cena.html">Cena</a></li>
+        <li><a href="dia-nevado.html">Día nevado</a></li>
+        <li><a href="muneco.html">Muñeco</a></li>
+        <li><a href="teoria-canvas.html" aria-current="page">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="teoria-canvas">
+    <section id="intro-canvas">
+      <h1>La etiqueta &lt;canvas&gt; y el contexto 2D</h1>
+      <p class="lead">El elemento <code>&lt;canvas&gt;</code> de HTML5 es una superficie rectangular de píxeles sobre la que JavaScript puede dibujar gráficos, juegos y animaciones. Es la base sobre la que p5.js crea sus dibujos.</p>
+    </section>
+
+    <section id="que-es">
+      <h2>1. ¿Qué es &lt;canvas&gt;?</h2>
+      <p>Por sí solo, <code>&lt;canvas&gt;</code> es un contenedor vacío: no dibuja nada hasta que un script obtiene su <strong>contexto de renderizado</strong> y le envía instrucciones. A diferencia de SVG, que conserva cada figura como un elemento del DOM, el canvas es un <strong>mapa de bits</strong>: una vez pintada, una figura se convierte en píxeles y el navegador ya no recuerda que era un círculo o un rectángulo.</p>
+<pre><code>&lt;canvas id=&quot;lienzo&quot; width=&quot;400&quot; height=&quot;400&quot;&gt;
+  Tu navegador no soporta canvas.   &lt;!-- contenido alternativo --&gt;
+&lt;/canvas&gt;</code></pre>
+      <ul>
+        <li><code>width</code> y <code>height</code>: tamaño del lienzo en píxeles. Si se omiten, el valor por defecto es 300 × 150.</li>
+        <li>El texto interior se muestra solo en navegadores que no soportan canvas y sirve como contenido alternativo; también puede ayudar a la accesibilidad junto con atributos como <code>aria-label</code>.</li>
+        <li>Cambiar el tamaño con CSS <em>escala</em> la imagen ya dibujada; cambiar los atributos <code>width</code>/<code>height</code> modifica la resolución real (y borra el contenido).</li>
+      </ul>
+    </section>
+
+    <section id="contexto">
+      <h2>2. El contexto de renderizado</h2>
+      <p>El contexto es el objeto con los métodos de dibujo. Se obtiene con <code>getContext()</code>:</p>
+<pre><code>const canvas = document.getElementById(&#x27;lienzo&#x27;);
+const ctx = canvas.getContext(&#x27;2d&#x27;);   // CanvasRenderingContext2D</code></pre>
+      <p>El parámetro indica el tipo de contexto. Un mismo canvas solo puede tener un tipo de contexto:</p>
+      <div class="tabla-scroll">
+      <table>
+        <thead><tr><th>Valor</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td><code>'2d'</code></td><td>Contexto de dibujo bidimensional (<code>CanvasRenderingContext2D</code>). Es el que usan los proyectos de este sitio.</td></tr>
+          <tr><td><code>'webgl'</code>, <code>'webgl2'</code></td><td>Gráficos 3D acelerados por GPU.</td></tr>
+          <tr><td><code>'bitmaprenderer'</code></td><td>Muestra imágenes de tipo <code>ImageBitmap</code>.</td></tr>
+          <tr><td><code>'webgpu'</code></td><td>API gráfica moderna basada en WebGPU.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="nota">Si el navegador no soporta el contexto pedido, <code>getContext()</code> devuelve <code>null</code>; por eso conviene comprobarlo antes de dibujar.</p>
+    </section>
+
+    <section id="coordenadas">
+      <h2>3. Sistema de coordenadas</h2>
+      <p>El origen <code>(0, 0)</code> está en la esquina <strong>superior izquierda</strong>. El eje <em>x</em> crece hacia la derecha y el eje <em>y</em> crece hacia <strong>abajo</strong>. Es el mismo sistema que usa p5.js, por eso <code>ellipse(200, 250, ...)</code> en Khan Academy aparece en la mitad inferior de un lienzo de 400 × 400.</p>
+    </section>
+
+    <section id="dibujo-2d">
+      <h2>4. Dibujar con el contexto 2D</h2>
+      <h3>Rectángulos</h3>
+<pre><code>ctx.fillStyle = &#x27;rgb(139, 69, 19)&#x27;;
+ctx.fillRect(130, 180, 80, 40);     // relleno: x, y, ancho, alto
+ctx.strokeRect(130, 180, 80, 40);   // solo contorno
+ctx.clearRect(0, 0, 400, 400);      // borra un área</code></pre>
+      <h3>Trazados (paths)</h3>
+      <p>Las demás figuras se construyen con un trazado: se inicia con <code>beginPath()</code>, se describe con <code>moveTo</code>, <code>lineTo</code>, <code>arc</code> o <code>ellipse</code>, y finalmente se pinta con <code>fill()</code> y/o <code>stroke()</code>.</p>
+<pre><code>ctx.beginPath();
+ctx.ellipse(200, 250, 100, 50, 0, 0, Math.PI * 2); // x, y, radioX, radioY, rotación, inicio, fin
+ctx.fill();
+
+ctx.beginPath();          // una línea (como la boca del conejo)
+ctx.moveTo(150, 200);
+ctx.lineTo(250, 200);
+ctx.stroke();</code></pre>
+      <p>Observa que <code>ellipse()</code> del contexto recibe <em>radios</em>, mientras que <code>ellipse()</code> de p5.js recibe el <em>ancho y alto totales</em>.</p>
+      <h3>Estilos</h3>
+      <ul>
+        <li><code>fillStyle</code> y <code>strokeStyle</code>: color de relleno y de contorno (<code>'#1ecc5b'</code>, <code>'rgb(30,204,91)'</code>, gradientes...).</li>
+        <li><code>lineWidth</code>: grosor de las líneas. <code>globalAlpha</code>: transparencia.</li>
+        <li><code>createLinearGradient()</code> y <code>createRadialGradient()</code>: degradados.</li>
+      </ul>
+      <h3>Texto, imágenes y transformaciones</h3>
+      <ul>
+        <li><code>fillText(texto, x, y)</code> y la propiedad <code>font</code> para escribir.</li>
+        <li><code>drawImage(img, x, y)</code> para insertar imágenes.</li>
+        <li><code>translate()</code>, <code>rotate()</code>, <code>scale()</code> modifican el sistema de coordenadas; <code>save()</code> y <code>restore()</code> guardan y recuperan el estado.</li>
+      </ul>
+    </section>
+
+    <section id="animacion">
+      <h2>5. Animación</h2>
+      <p>El canvas no tiene "ciclo" propio. Para animar se repite este patrón con <code>requestAnimationFrame()</code>: borrar el cuadro anterior, actualizar variables y volver a dibujar. Esta es exactamente la tarea que p5.js automatiza con <code>draw()</code>.</p>
+    </section>
+
+    <section id="equivalencias">
+      <h2>6. Equivalencias entre p5.js y la API Canvas 2D</h2>
+      <div class="tabla-scroll">
+      <table>
+        <thead><tr><th>p5.js</th><th>Canvas 2D</th></tr></thead>
+        <tbody>
+          <tr><td><code>createCanvas(400, 400)</code></td><td><code>&lt;canvas width="400" height="400"&gt;</code> + <code>getContext('2d')</code></td></tr>
+          <tr><td><code>background(255)</code></td><td><code>ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, w, h)</code></td></tr>
+          <tr><td><code>fill(30, 204, 91)</code></td><td><code>ctx.fillStyle = 'rgb(30, 204, 91)'</code></td></tr>
+          <tr><td><code>noStroke()</code></td><td>No llamar a <code>ctx.stroke()</code></td></tr>
+          <tr><td><code>rect(x, y, w, h)</code></td><td><code>ctx.fillRect(x, y, w, h)</code> / <code>strokeRect</code></td></tr>
+          <tr><td><code>ellipse(x, y, w, h)</code></td><td><code>ctx.ellipse(x, y, w/2, h/2, 0, 0, 2π)</code> + <code>fill()</code></td></tr>
+          <tr><td><code>line(x1, y1, x2, y2)</code></td><td><code>moveTo</code> + <code>lineTo</code> + <code>stroke()</code></td></tr>
+          <tr><td><code>draw()</code></td><td><code>requestAnimationFrame(cuadro)</code></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section id="demo">
+      <h2>7. Demostración: la rana con Canvas 2D puro</h2>
+      <p>Este lienzo reproduce la rana del primer proyecto <strong>sin p5.js</strong>, usando solo <code>getContext('2d')</code>. Debajo, una pelota que rebota con <code>requestAnimationFrame()</code>.</p>
+      <div class="canvas-wrap"><canvas id="demo-canvas" width="400" height="300" aria-label="Rana dibujada con la API Canvas 2D"></canvas></div>
+      <p></p>
+      <div class="canvas-wrap"><canvas id="demo-animacion" width="400" height="120" aria-label="Pelota rebotando"></canvas></div>
+      <h3>Código (js/canvas-demo.js)</h3>
+<pre><code>/* Demostraciones con la API Canvas 2D pura (sin librerías). */
+(function () {
+  // ---------- 1) La rana, dibujada sin p5.js ----------
+  var canvas = document.getElementById(&#x27;demo-canvas&#x27;);
+  if (canvas &amp;&amp; canvas.getContext) {
+    var ctx = canvas.getContext(&#x27;2d&#x27;);
+
+    // Equivalente a ellipse(x, y, ancho, alto) de p5.js
+    function elipse(x, y, ancho, alto) {
+      ctx.beginPath();
+      ctx.ellipse(x, y, ancho / 2, alto / 2, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    ctx.fillStyle = &#x27;#ffffff&#x27;;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);   // background(255)
+
+    ctx.fillStyle = &#x27;rgb(30, 204, 91)&#x27;;                // fill(30, 204, 91)
+    elipse(200, 150, 200, 100);                        // cara
+    elipse(150, 100, 40, 40);                          // cuenca izquierda
+    elipse(250, 100, 40, 40);                          // cuenca derecha
+
+    ctx.fillStyle = &#x27;rgb(255, 255, 255)&#x27;;
+    elipse(150, 100, 30, 30);                          // ojo izquierdo
+    elipse(250, 100, 30, 30);                          // ojo derecho
+
+    ctx.fillStyle = &#x27;rgb(0, 0, 0)&#x27;;
+    elipse(200, 150, 100, 50);                         // boca
+    ctx.fillRect(145, 95, 10, 10);                     // pupila izquierda
+    ctx.fillRect(245, 95, 10, 10);                     // pupila derecha
+  }
+
+  // ---------- 2) Animación con requestAnimationFrame ----------
+  var lienzo2 = document.getElementById(&#x27;demo-animacion&#x27;);
+  if (lienzo2 &amp;&amp; lienzo2.getContext) {
+    var c = lienzo2.getContext(&#x27;2d&#x27;);
+    var x = 40, vx = 3, radio = 22;
+
+    function cuadro() {
+      c.clearRect(0, 0, lienzo2.width, lienzo2.height);   // borra el cuadro anterior
+      c.fillStyle = &#x27;#38bdf8&#x27;;
+      c.beginPath();
+      c.arc(x, lienzo2.height / 2, radio, 0, Math.PI * 2);
+      c.fill();
+
+      x += vx;
+      if (x &gt; lienzo2.width - radio || x &lt; radio) { vx = -vx; }   // rebote
+      requestAnimationFrame(cuadro);
+    }
+    cuadro();
+  }
+})();</code></pre>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sitio hecho con HTML, CSS y JavaScript · Dibujos con p5.js · Proyectos originales de Khan Academy</p>
+  </footer>
+
+  <script src="js/canvas-demo.js"></script>
+</body>
+</html>

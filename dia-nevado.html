@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Un muñeco de nieve bajo el sol, sobre un suelo helado.">
+  <title>Día nevado soleado · p5.js Lab</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">p5<span>.js</span> Lab</a>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="conejo.html">Conejo</a></li>
+        <li><a href="cena.html">Cena</a></li>
+        <li><a href="dia-nevado.html" aria-current="page">Día nevado</a></li>
+        <li><a href="muneco.html">Muñeco</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="proyecto-dia-nevado">
+    <section id="presentacion">
+      <h1>Día nevado soleado</h1>
+      <p class="lead">Una escena completa con cielo, suelo, sol y un muñeco de nieve formado por tres círculos. Combina fondo, rectángulo y elipses con distintos colores.</p>
+      <p><a class="boton" href="https://es.khanacademy.org/computer-programming/derivado-de-desafo-da-nevado-soleado/6285240126259200" target="_blank" rel="noopener">Ver el proyecto original en Khan Academy ↗</a></p>
+    </section>
+
+    <section id="resultado">
+      <h2>Resultado</h2>
+      <div class="canvas-wrap" id="lienzo" aria-label="Dibujo: Día nevado soleado" role="img"></div>
+    </section>
+
+    <section id="codigo">
+      <h2>Código</h2>
+      <p>Código del proyecto de Khan Academy. En <code>js/dia-nevado.js</code> está envuelto en <code>setup()</code> para funcionar con p5.js en una página web.</p>
+<pre><code>// The ground
+fill(133, 255, 233);
+background(0, 255, 255);
+rect(0, 300, 400, 100);
+
+// The sun
+fill(251, 255, 0);
+ellipse(80, 64, 100, 100);
+
+// The snowman
+fill(245, 240, 240);
+ellipse(200, 300, 150, 150);
+ellipse(200, 200, 100, 100);
+ellipse(200, 120, 75, 75);</code></pre>
+    </section>
+
+    <section id="conceptos">
+      <h2>Conceptos que se practican</h2>
+      <div class="tabla-scroll">
+      <table>
+        <thead><tr><th scope="col">Elemento</th><th scope="col">Qué hace</th></tr></thead>
+        <tbody>
+        <tr><th scope="row"><code>fill() antes de background()</code></th><td><code>background()</code> pinta todo el lienzo; el <code>fill()</code> previo sigue activo para el <code>rect()</code> del suelo.</td></tr>
+        <tr><th scope="row"><code>rect(0, 300, 400, 100)</code></th><td>Un rectángulo que ocupa todo el ancho en la parte baja: el suelo.</td></tr>
+        <tr><th scope="row"><code>Tres elipses apiladas</code></th><td>Cuerpo, torso y cabeza del muñeco, cada una más pequeña y más arriba.</td></tr>
+        <tr><th scope="row"><code>Borde por defecto</code></th><td>Sin <code>noStroke()</code>, las figuras conservan su contorno negro.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section id="captura">
+      <h2>Captura del editor original</h2>
+      <figure>
+        <img src="img/captura-dia-nevado.png" alt="Captura del código y del resultado de Día nevado soleado en Khan Academy">
+        <figcaption>Editor de Khan Academy: código a la izquierda, resultado a la derecha.</figcaption>
+      </figure>
+    </section>
+
+    <nav class="pager" aria-label="Proyectos">
+      <a class="boton" href="cena.html">← ¿Qué hay de cena?</a>
+      <a class="boton" href="muneco.html">Muñeco de nieve que saluda →</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sitio hecho con HTML, CSS y JavaScript · Dibujos con p5.js · Proyectos originales de Khan Academy</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="js/dia-nevado.js"></script>
+</body>
+</html>
