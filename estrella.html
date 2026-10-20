@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Una estrella amarilla sobre un cielo azul noche, controlada por las variables xPos e yPos.">
+  <title>Estrella en el cielo nocturno · p5.js Lab</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">p5<span>.js</span> Lab</a>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="conejo.html">Conejo</a></li>
+        <li><a href="cena.html">Cena</a></li>
+        <li><a href="dia-nevado.html">Día nevado</a></li>
+        <li><a href="muneco.html">Muñeco</a></li>
+        <li><a href="sol-explota.html">Sol</a></li>
+        <li><a href="nubes.html">Nubes</a></li>
+        <li><a href="estrella.html" aria-current="page">Estrella</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="proyecto-estrella">
+    <section id="presentacion">
+      <h1>Estrella en el cielo nocturno</h1>
+      <p class="lead">Una estrella amarilla dibujada con un círculo pequeño sobre un fondo azul noche. Su posición no está escrita en números sueltos, sino en dos variables, <code>xPos</code> e <code>yPos</code>: es la base para animar la estrella en los siguientes pasos.</p>
+    </section>
+
+    <section id="resultado">
+      <h2>Resultado</h2>
+      <div class="canvas-wrap" id="lienzo" aria-label="Dibujo: Estrella en el cielo nocturno" role="img"></div>
+      <div class="controles"><button type="button" id="btn-mover">Mover la estrella</button><button type="button" id="btn-centro">Volver al centro</button></div>
+    </section>
+
+    <section id="codigo">
+      <h2>Código</h2>
+      <p>Código del proyecto de Khan Academy. En <code>js/estrella.js</code> está adaptado a p5.js para funcionar en una página web.</p>
+<pre><code>var xPos = 200;
+var yPos = 200;
+
+draw = function() {
+    background(29, 40, 115);
+    fill(255, 242, 0);
+    ellipse(xPos, yPos, 10, 10);
+};</code></pre>
+      <p class="nota">En p5.js <code>draw</code> se declara como <code>function draw()</code> y el lienzo se crea en <code>setup()</code>. Los botones solo cambian <code>xPos</code> e <code>yPos</code>; el dibujo se actualiza porque <code>draw()</code> se repite.</p>
+    </section>
+
+    <section id="conceptos">
+      <h2>Conceptos que se practican</h2>
+      <div class="tabla-scroll">
+      <table>
+        <thead><tr><th scope="col">Elemento</th><th scope="col">Qué hace</th></tr></thead>
+        <tbody>
+        <tr><th scope="row"><code>var xPos, var yPos</code></th><td>Guardan la posición de la estrella. Al estar fuera de <code>draw()</code> conservan su valor entre fotogramas y se pueden cambiar sin tocar el dibujo (prueba el botón de arriba).</td></tr>
+        <tr><th scope="row"><code>background(29, 40, 115)</code></th><td>Pinta el cielo azul noche. Está dentro de <code>draw()</code>, así que borra el fotograma anterior en cada vuelta.</td></tr>
+        <tr><th scope="row"><code>fill(255, 242, 0)</code></th><td>Color de relleno amarillo para la estrella; se aplica a las figuras que se dibujen después.</td></tr>
+        <tr><th scope="row"><code>ellipse(xPos, yPos, 10, 10)</code></th><td>Un círculo de 10 × 10 píxeles centrado en (xPos, yPos). Es la estrella; con (200, 200) queda en el centro del lienzo.</td></tr>
+        <tr><th scope="row"><code>Orden de dibujo</code></th><td>Primero el fondo y después la estrella. Si <code>background()</code> se llamara al final, taparía la estrella.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section id="captura">
+      <h2>Captura del editor original</h2>
+      <figure>
+        <img src="img/captura-estrella.png" alt="Captura del código y del resultado de Estrella en el cielo nocturno en Khan Academy">
+        <figcaption>Editor de Khan Academy: código a la izquierda, resultado a la derecha.</figcaption>
+      </figure>
+    </section>
+
+    <nav class="pager" aria-label="Proyectos">
+      <a class="boton" href="nubes.html">← Nubes que se separan</a>
+      <a class="boton" href="teoria-canvas.html">Teoría: canvas →</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sitio hecho con HTML, CSS y JavaScript · Dibujos con p5.js · Proyectos originales de Khan Academy</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="js/estrella.js"></script>
+</body>
+</html>
