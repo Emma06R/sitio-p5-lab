@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Un sol que crece y sube desde el horizonte mientras cambian sus variables en cada fotograma.">
+  <title>El sol que explota · p5.js Lab</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">p5<span>.js</span> Lab</a>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="conejo.html">Conejo</a></li>
+        <li><a href="cena.html">Cena</a></li>
+        <li><a href="dia-nevado.html">Día nevado</a></li>
+        <li><a href="muneco.html">Muñeco</a></li>
+        <li><a href="sol-explota.html" aria-current="page">Sol</a></li>
+        <li><a href="nubes.html">Nubes</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="proyecto-sol-explota">
+    <section id="presentacion">
+      <h1>El sol que explota</h1>
+      <p class="lead">Un sol amarillo nace detrás del suelo y se va haciendo cada vez más grande hasta llenar el cielo. Es la primera animación del sitio: el programa repite <code>draw()</code> y en cada vuelta cambia dos variables, <code>sunSize</code> y <code>sunY</code>.</p>
+      <p><a class="boton" href="https://es.khanacademy.org/computer-programming/derivado-de-desafo-el-sol-que-explota/4679321755959296" target="_blank" rel="noopener">Ver el proyecto original en Khan Academy ↗</a></p>
+    </section>
+
+    <section id="resultado">
+      <h2>Resultado</h2>
+      <div class="canvas-wrap" id="lienzo" aria-label="Animación: El sol que explota" role="img"></div>
+      <div class="controles"><button type="button" id="btn-pausa">Pausar</button><button type="button" id="btn-reiniciar">Reiniciar</button></div>
+    </section>
+
+    <section id="codigo">
+      <h2>Código</h2>
+      <p>Código del proyecto de Khan Academy. En <code>js/sol-explota.js</code> está adaptado a p5.js para funcionar en una página web.</p>
+<pre><code>var sunSize = 30;
+var sunY = 298;
+
+draw = function() {
+    noStroke();
+    background(82, 222, 240);
+
+    fill(255, 204, 0);
+    ellipse(200, sunY, sunSize, sunSize);
+
+    fill(76, 168, 67);
+    rect(0, 300, 400, 100);
+
+    sunY = sunY -0.6;
+    sunSize = sunSize + 1;
+};</code></pre>
+      <p class="nota">En Khan Academy la animación se escribe asignando una función a <code>draw</code>. En p5.js se declara como <code>function draw()</code>; el resto de las instrucciones no cambia. Los botones de arriba solo pausan y reinician las dos variables (<code>js/sol-explota.js</code>).</p>
+    </section>
+
+    <section id="conceptos">
+      <h2>Conceptos que se practican</h2>
+      <div class="tabla-scroll">
+      <table>
+        <thead><tr><th scope="col">Elemento</th><th scope="col">Qué hace</th></tr></thead>
+        <tbody>
+        <tr><th scope="row"><code>var sunSize, var sunY</code></th><td>Variables declaradas <em>fuera</em> de <code>draw()</code>: conservan su valor entre fotogramas. Si estuvieran dentro, se reiniciarían en cada vuelta y no habría animación.</td></tr>
+        <tr><th scope="row"><code>draw()</code></th><td>Se ejecuta unas 60 veces por segundo. Cada ejecución dibuja un fotograma completo.</td></tr>
+        <tr><th scope="row"><code>background()</code></th><td>Se llama al inicio de <code>draw()</code> para borrar el fotograma anterior; sin ella el sol dejaría un rastro.</td></tr>
+        <tr><th scope="row"><code>sunY = sunY - 0.6</code></th><td>Mueve el centro del sol hacia arriba (en p5.js y disminuye hacia arriba) 0.6 píxeles por fotograma.</td></tr>
+        <tr><th scope="row"><code>sunSize = sunSize + 1</code></th><td>Aumenta el diámetro 1 píxel por fotograma: el radio crece 0.5, mientras el centro sube 0.6. Por eso el borde inferior casi no se mueve y parece que el sol «sale» del horizonte.</td></tr>
+        <tr><th scope="row"><code>Orden de dibujo</code></th><td>El suelo verde se dibuja <em>después</em> del sol, así que lo tapa. Si se invirtiera el orden, el sol se vería por delante del suelo.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section id="captura">
+      <h2>Captura del editor original</h2>
+      <figure>
+        <img src="img/captura-sol-explota.png" alt="Captura del código y del resultado de El sol que explota en Khan Academy">
+        <figcaption>Editor de Khan Academy: código a la izquierda, resultado a la derecha.</figcaption>
+      </figure>
+    </section>
+
+    <nav class="pager" aria-label="Proyectos">
+      <a class="boton" href="muneco.html">← Muñeco de nieve que saluda</a>
+      <a class="boton" href="nubes.html">Nubes que se separan →</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sitio hecho con HTML, CSS y JavaScript · Dibujos con p5.js · Proyectos originales de Khan Academy</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="js/sol-explota.js"></script>
+</body>
+</html>

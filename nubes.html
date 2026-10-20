@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dos nubes se alejan una de otra mientras el sol crece detrás de ellas.">
+  <title>Nubes que se separan · p5.js Lab</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">p5<span>.js</span> Lab</a>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="conejo.html">Conejo</a></li>
+        <li><a href="cena.html">Cena</a></li>
+        <li><a href="dia-nevado.html">Día nevado</a></li>
+        <li><a href="muneco.html">Muñeco</a></li>
+        <li><a href="sol-explota.html">Sol</a></li>
+        <li><a href="nubes.html" aria-current="page">Nubes</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="proyecto-nubes">
+    <section id="presentacion">
+      <h1>Nubes que se separan</h1>
+      <p class="lead">Dos nubes hechas con tres elipses cada una se mueven en direcciones opuestas y dejan ver un sol que crece detrás. Cada nube comparte una sola variable (<code>leftX</code> o <code>rightX</code>), así que mover una variable mueve sus tres elipses a la vez.</p>
+      <p><a class="boton" href="https://es.khanacademy.org/computer-programming/derivado-de-desafo-nubes-que-se-separan/5952585010626560" target="_blank" rel="noopener">Ver el proyecto original en Khan Academy ↗</a></p>
+    </section>
+
+    <section id="resultado">
+      <h2>Resultado</h2>
+      <div class="canvas-wrap" id="lienzo" aria-label="Animación: Nubes que se separan" role="img"></div>
+      <div class="controles"><button type="button" id="btn-pausa">Pausar</button><button type="button" id="btn-reiniciar">Reiniciar</button></div>
+    </section>
+
+    <section id="codigo">
+      <h2>Código</h2>
+      <p>Código del proyecto de Khan Academy. En <code>js/nubes.js</code> está adaptado a p5.js para funcionar en una página web.</p>
+<pre><code>noStroke();
+var leftX = 150;
+var rightX = 290;
+var sunRadius = 90;
+
+draw = function() {
+    background(184, 236, 255);
+
+    fill(255, 170, 0);
+    ellipse(200, 100, sunRadius, sunRadius);
+
+    // clouds
+    fill(255, 255, 255);
+    // left cloud
+    ellipse(leftX, 150, 126, 97);
+    ellipse(leftX+62, 150, 70, 60);
+    ellipse(leftX-62, 150, 70, 60);
+
+    // right cloud
+    ellipse(rightX, 100, 126, 97);
+    ellipse(rightX+62, 100, 70, 60);
+    ellipse(rightX-62, 100, 70, 60);
+
+    leftX = leftX -=1;
+    rightX = rightX +=1;
+    sunRadius = sunRadius +=2;
+};</code></pre>
+      <p class="nota">En p5.js <code>noStroke()</code> se llama una sola vez en <code>setup()</code> y <code>draw</code> se declara como <code>function draw()</code>. En el código adaptado (<code>js/nubes.js</code>) esas tres líneas de movimiento se escriben de forma más corta (<code>leftX -= 1;</code>), con el mismo resultado.</p>
+    </section>
+
+    <section id="conceptos">
+      <h2>Conceptos que se practican</h2>
+      <div class="tabla-scroll">
+      <table>
+        <thead><tr><th scope="col">Elemento</th><th scope="col">Qué hace</th></tr></thead>
+        <tbody>
+        <tr><th scope="row"><code>var leftX, var rightX</code></th><td>Posición horizontal del centro de cada nube. Las otras dos elipses de la nube se calculan sumando o restando 62 (<code>leftX + 62</code>, <code>leftX - 62</code>).</td></tr>
+        <tr><th scope="row"><code>Tres elipses = una nube</code></th><td>Una elipse grande (126 × 97) en el centro y dos más pequeñas (70 × 60) a los lados forman la silueta de la nube.</td></tr>
+        <tr><th scope="row"><code>leftX = leftX -=1</code></th><td>La nube izquierda se desplaza 1 píxel a la izquierda por fotograma; <code>rightX = rightX +=1</code> mueve la derecha en sentido contrario. Así «se separan». <code>-=</code> y <code>+=</code> restan o suman y guardan el resultado, por eso equivale a <code>leftX -= 1</code>.</td></tr>
+        <tr><th scope="row"><code>sunRadius</code></th><td>Controla el tamaño del sol. Aunque se llama «radius», <code>ellipse()</code> recibe diámetros, así que es en realidad el diámetro.</td></tr>
+        <tr><th scope="row"><code>Orden de dibujo</code></th><td>El sol se pinta antes que las nubes, por eso las nubes pasan por delante.</td></tr>
+        <tr><th scope="row"><code>background()</code></th><td>Se repite en cada fotograma para borrar lo dibujado antes y que se vea movimiento en lugar de un rastro.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section id="captura">
+      <h2>Captura del editor original</h2>
+      <figure>
+        <img src="img/captura-nubes.png" alt="Captura del código y del resultado de Nubes que se separan en Khan Academy">
+        <figcaption>Editor de Khan Academy: código a la izquierda, resultado a la derecha.</figcaption>
+      </figure>
+    </section>
+
+    <nav class="pager" aria-label="Proyectos">
+      <a class="boton" href="sol-explota.html">← El sol que explota</a>
+      <a class="boton" href="teoria-canvas.html">Teoría: canvas →</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sitio hecho con HTML, CSS y JavaScript · Dibujos con p5.js · Proyectos originales de Khan Academy</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="js/nubes.js"></script>
+</body>
+</html>
