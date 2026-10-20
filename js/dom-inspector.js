@@ -16,6 +16,8 @@
     { archivo: "cena.html", etiqueta: "Cena" },
     { archivo: "dia-nevado.html", etiqueta: "Día nevado" },
     { archivo: "muneco.html", etiqueta: "Muñeco" },
+    { archivo: "sol-explota.html", etiqueta: "Sol" },
+    { archivo: "nubes.html", etiqueta: "Nubes" },
     { archivo: "teoria-canvas.html", etiqueta: "Teoría canvas" },
     { archivo: "teoria-p5.html", etiqueta: "Teoría p5.js" },
     { archivo: "dom-inspector.html", etiqueta: "DOM Inspector" }
