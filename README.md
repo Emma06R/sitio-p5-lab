@@ -9,6 +9,7 @@ Sitio web con HTML, CSS y JavaScript que reúne proyectos de dibujo creados en K
 | `index.html` | Página principal con tarjetas de los proyectos |
 | `rana.html`, `conejo.html`, `cena.html`, `dia-nevado.html`, `muneco.html` | Los cinco dibujos con su código y captura original |
 | `sol-explota.html`, `nubes.html` | Dos animaciones con `draw()`: el sol que explota y las nubes que se separan |
+| `estrella.html` | Una estrella posicionada con las variables `xPos` e `yPos` |
 | `teoria-canvas.html` | La etiqueta `<canvas>` y el contexto de renderizado 2D |
 | `teoria-p5.html` | Fundamentos de p5.js |
 | `dom-inspector.html` | Árbol gráfico del DOM de cada página |
@@ -18,7 +19,7 @@ Sitio web con HTML, CSS y JavaScript que reúne proyectos de dibujo creados en K
 ```
 .
 ├── index.html, rana.html, conejo.html, cena.html, dia-nevado.html, muneco.html,
-│   sol-explota.html, nubes.html
+│   sol-explota.html, nubes.html, estrella.html
 ├── teoria-canvas.html, teoria-p5.html, dom-inspector.html
 ├── css/styles.css
 ├── js/            (un archivo por dibujo + dom-inspector.js + dom-snapshot.js)

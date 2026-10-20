@@ -18,6 +18,7 @@
     { archivo: "muneco.html", etiqueta: "Muñeco" },
     { archivo: "sol-explota.html", etiqueta: "Sol" },
     { archivo: "nubes.html", etiqueta: "Nubes" },
+    { archivo: "estrella.html", etiqueta: "Estrella" },
     { archivo: "teoria-canvas.html", etiqueta: "Teoría canvas" },
     { archivo: "teoria-p5.html", etiqueta: "Teoría p5.js" },
     { archivo: "dom-inspector.html", etiqueta: "DOM Inspector" }
