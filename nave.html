@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nave espacial vectorial controlada con el teclado: transformaciones 2D, avance con seno y coseno, pantalla envolvente y proyectiles.">
+  <title>Nave vectorial y proyectiles 2D · p5.js Lab</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">p5<span>.js</span> Lab</a>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="conejo.html">Conejo</a></li>
+        <li><a href="cena.html">Cena</a></li>
+        <li><a href="dia-nevado.html">Día nevado</a></li>
+        <li><a href="muneco.html">Muñeco</a></li>
+        <li><a href="sol-explota.html">Sol</a></li>
+        <li><a href="nubes.html">Nubes</a></li>
+        <li><a href="estrella.html">Estrella</a></li>
+        <li><a href="nave.html" aria-current="page">Nave</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="proyecto-nave">
+    <section id="presentacion">
+      <h1>Nave vectorial y proyectiles 2D</h1>
+      <p class="lead">Una nave triangular se mueve por la pantalla con el teclado, gira sobre su centro y dispara proyectiles. Todo se calcula con <strong>transformaciones geométricas 2D</strong> (escala, rotación y traslación) y con vectores de velocidad obtenidos con seno y coseno.</p>
+      <p class="nota">El programa original está hecho en <strong>Python con Pygame</strong> y se ejecuta en una ventana de escritorio de 800 × 600. Como un navegador no puede ejecutar Pygame, la demostración de abajo es una <strong>versión web equivalente hecha con p5.js</strong> (<code>js/nave.js</code>) que repite la misma lógica. El código de Python se muestra completo más abajo y se puede descargar.</p>
+      <p><a class="boton" href="python/trabajos_graficacion.py" download>Descargar trabajos_graficacion.py</a></p>
+    </section>
+
+    <section id="resultado">
+      <h2>Resultado (versión web)</h2>
+      <div class="canvas-wrap" id="lienzo" aria-label="Nave espacial triangular con proyectiles sobre fondo oscuro" role="img"></div>
+      <p id="aviso-controles" class="nota" aria-live="polite">Haz clic en el lienzo para activar los controles.</p>
+      <p id="datos" aria-live="off"><code>x: – · y: – · ángulo: – · proyectiles activos: –</code></p>
+      <div class="controles"><button type="button" id="btn-reiniciar">Reiniciar nave</button></div>
+      <div class="tabla-scroll">
+      <table>
+        <thead><tr><th scope="col">Tecla</th><th scope="col">Acción</th></tr></thead>
+        <tbody>
+        <tr><th scope="row">A o ←</th><td>Girar a la izquierda</td></tr>
+        <tr><th scope="row">D o →</th><td>Girar a la derecha</td></tr>
+        <tr><th scope="row">W o ↑</th><td>Avanzar en la dirección de la proa</td></tr>
+        <tr><th scope="row">Barra espaciadora</th><td>Disparar (un proyectil cada 250 ms)</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section id="codigo">
+      <h2>Código (Python + Pygame)</h2>
+      <p>Programa original completo, elaborado por Ramirez Cruz Josué Emmanuel. Para ejecutarlo en tu computadora necesitas Python y Pygame (<code>pip install pygame</code>) y correr <code>python trabajos_graficacion.py</code>.</p>
+<pre><code># Elaborado por: Ramirez Cruz Josué Emmanuel
+# Nave vectorial y proyectiles 2D
+import pygame
+import sys
+import math
+
+# 1.- Inicializar Pygame y configurar la ventana
+pygame.init()
+ANCHO, ALTO = 800, 600
+pantalla = pygame.display.set_mode((ANCHO, ALTO))
+pygame.display.set_caption("Simulación Interactiva 2D - Nave Espacial")
+reloj = pygame.time.Clock()
+
+# 2.- Función de transformación geométrica 2D
+def transformar_vertice(vertice, pos_x, pos_y, angulo, escala=1.0):
+    x, y = vertice
+    # Escalamiento
+    x_esc, y_esc = x * escala, y * escala
+    # Rotación (matemática continua)
+    rad = math.radians(angulo)
+    x_rot = x_esc * math.cos(rad) - y_esc * math.sin(rad)
+    y_rot = x_esc * math.sin(rad) + y_esc * math.cos(rad)
+    # Traslación al sistema de coordenadas de la pantalla
+    return (x_rot + pos_x, y_rot + pos_y)
+
+
+modelo_triangulo = [(0, -25), (-15, 15), (15, 15)]
+
+# Variables de estado de la nave
+pos_x, pos_y = 400.0, 300.0
+angulo = 0.0
+VELOCIDAD_NAVE = 4.0
+VELOCIDAD_GIRO = 4.5
+ESCALA = 1.0
+
+# Estructura y control de disparo
+proyectiles = []
+ultimo_disparo = 0
+COOLDOWN_DISPARO = 250  # Milisegundos entre disparos (250 ms)
+VELOCIDAD_PROYECTIL = 9.0
+
+# Bucle Principal de Renderizado
+ejecutando = True
+while ejecutando:
+    # 1. Limpieza de pantalla (fondo oscuro)
+    pantalla.fill((25, 25, 35))
+
+    # 2. Manejo de eventos del sistema
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:
+            ejecutando = False
+
+    # 3. Lectura de controles por teclado
+    teclas = pygame.key.get_pressed()
+    tiempo_actual = pygame.time.get_ticks()
+
+    # Rotación sobre su propio centroide (A / D o Flechas Izquierda / Derecha)
+    if teclas[pygame.K_a] or teclas[pygame.K_LEFT]:
+        angulo -= VELOCIDAD_GIRO
+    if teclas[pygame.K_d] or teclas[pygame.K_RIGHT]:
+        angulo += VELOCIDAD_GIRO
+
+    # Avance Vectorial Continuo (W o Flecha Arriba)
+    if teclas[pygame.K_w] or teclas[pygame.K_UP]:
+        rad = math.radians(angulo)
+        pos_x += math.sin(rad) * VELOCIDAD_NAVE
+        pos_y -= math.cos(rad) * VELOCIDAD_NAVE
+
+    # Reto Opcional (+10 Puntos Extra): Pantalla Envolvente (Screen Wrapping)
+    pos_x = pos_x % ANCHO
+    pos_y = pos_y % ALTO
+
+    # Generación Dinámica de Proyectiles (Barra Espaciadora)
+    if teclas[pygame.K_SPACE]:
+        if tiempo_actual - ultimo_disparo &gt;= COOLDOWN_DISPARO:
+            # Calcular la posición exacta de la punta (proa) en el espacio de pantalla
+            punta_local = modelo_triangulo[0]
+            punta_x, punta_y = transformar_vertice(punta_local, pos_x, pos_y, angulo, ESCALA)
+            
+            # Calcular vector de velocidad del proyectil basado en la orientación de la nave
+            rad = math.radians(angulo)
+            vx = math.sin(rad) * VELOCIDAD_PROYECTIL
+            vy = -math.cos(rad) * VELOCIDAD_PROYECTIL
+
+            # Añadir nuevo proyectil a la lista dinámica
+            proyectiles.append({
+                'x': punta_x,
+                'y': punta_y,
+                'vx': vx,
+                'vy': vy
+            })
+            ultimo_disparo = tiempo_actual
+
+    # 4. Actualización y Gestión de Memoria de los Proyectiles
+    proyectiles_activos = []
+    for p in proyectiles:
+        # Mover proyectil
+        p['x'] += p['vx']
+        p['y'] += p['vy']
+
+        # Verificar si permanece dentro del lienzo de 800x600
+        if 0 &lt;= p['x'] &lt;= ANCHO and 0 &lt;= p['y'] &lt;= ALTO:
+            proyectiles_activos.append(p)
+
+    # Reemplazar la lista con solo los proyectiles vigentes (libera memoria de los fuera de límites)
+    proyectiles = proyectiles_activos
+
+    # 5. Renderizado en pantalla
+    
+    # Dibujar la nave espacial
+    vertices_pantalla = [
+        transformar_vertice(v, pos_x, pos_y, angulo, ESCALA)
+        for v in modelo_triangulo
+    ]
+    pygame.draw.polygon(pantalla, (0, 255, 180), vertices_pantalla, 2)
+
+    # Dibujar proyectiles activos
+    for p in proyectiles:
+        pygame.draw.circle(pantalla, (255, 220, 50), (int(p['x']), int(p['y'])), 3)
+
+    # Intercambiar búferes y mantener 60 FPS (Double Buffering)
+    pygame.display.flip()
+    reloj.tick(60)
+
+pygame.quit()
+sys.exit()
+</code></pre>
+    </section>
+
+    <section id="conceptos">
+      <h2>Conceptos que se practican</h2>
+      <div class="tabla-scroll">
+      <table>
+        <thead><tr><th scope="col">Elemento</th><th scope="col">Qué hace</th></tr></thead>
+        <tbody>
+        <tr><th scope="row"><code>modelo_triangulo</code></th><td>Define la nave como tres vértices en coordenadas <em>locales</em>, centrados en (0, 0). La punta (proa) es (0, −25): en pantalla el eje y crece hacia abajo, por eso «arriba» es negativo.</td></tr>
+        <tr><th scope="row"><code>transformar_vertice()</code></th><td>Aplica a un vértice las tres transformaciones 2D, en este orden: <strong>escala → rotación → traslación</strong>. Devuelve la posición del vértice en la pantalla.</td></tr>
+        <tr><th scope="row"><code>Rotación</code></th><td><code>x' = x·cos θ − y·sin θ</code> y <code>y' = x·sin θ + y·cos θ</code>, con θ en radianes (<code>math.radians</code> convierte los grados).</td></tr>
+        <tr><th scope="row"><code>Avance vectorial</code></th><td>Con la nave apuntando a un ángulo θ, el movimiento es <code>x += sin θ · v</code> y <code>y -= cos θ · v</code>. Con θ = 0° la nave sube; con 90° va a la derecha.</td></tr>
+        <tr><th scope="row"><code>Pantalla envolvente</code></th><td>Reto opcional (+10 puntos): <code>pos_x % ANCHO</code> y <code>pos_y % ALTO</code> hacen que la nave reaparezca por el lado opuesto al salirse.</td></tr>
+        <tr><th scope="row"><code>Disparo y cooldown</code></th><td>Solo se crea un proyectil si pasaron al menos 250 ms desde el último (<code>pygame.time.get_ticks()</code>). Nace en la punta ya transformada y su velocidad (vx, vy) sale del ángulo de la nave.</td></tr>
+        <tr><th scope="row"><code>Lista de proyectiles</code></th><td>Cada frame se mueven y se conservan solo los que siguen dentro del lienzo de 800 × 600. Así la lista no crece sin límite y se libera memoria.</td></tr>
+        <tr><th scope="row"><code>Bucle principal</code></th><td>Cada vuelta: limpiar pantalla → leer eventos y teclas → actualizar posiciones → dibujar → <code>flip()</code> (doble búfer). <code>reloj.tick(60)</code> limita a 60 FPS.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Proyectos">
+      <a class="boton" href="estrella.html">← Estrella en el cielo nocturno</a>
+      <a class="boton" href="teoria-canvas.html">Teoría: canvas →</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <p>Sitio hecho con HTML, CSS y JavaScript · Dibujos con p5.js · Proyectos originales de Khan Academy</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="js/nave.js"></script>
+</body>
+</html>
