@@ -11,6 +11,7 @@ Sitio web con HTML, CSS y JavaScript que reúne proyectos de dibujo creados en K
 | `sol-explota.html`, `nubes.html` | Dos animaciones con `draw()`: el sol que explota y las nubes que se separan |
 | `estrella.html` | Una estrella posicionada con las variables `xPos` e `yPos` |
 | `nave.html` | Nave vectorial y proyectiles 2D: código Python + Pygame (`python/`) y versión web en p5.js |
+| `graficacion-3d/` | Proyecto aparte de Graficación (Unidad 3): figuras 3D con vértices y aristas, pipeline de transformaciones y proyección perspectiva |
 | `teoria-canvas.html` | La etiqueta `<canvas>` y el contexto de renderizado 2D |
 | `teoria-p5.html` | Fundamentos de p5.js |
 | `dom-inspector.html` | Árbol gráfico del DOM de cada página |
